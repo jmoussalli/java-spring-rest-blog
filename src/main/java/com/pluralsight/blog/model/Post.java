@@ -25,6 +25,9 @@ public class Post {
     @CreationTimestamp
     private Date date;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Author author;
+
     public Post() {
         super();
     }
@@ -33,6 +36,14 @@ public class Post {
         this();
         this.title = title;
         this.body = body;
+    }
+
+    public Post(String title, String body, Date date, Author author) {
+        this();
+        this.title = title;
+        this.body = body;
+        this.date = date;
+        this.author = author;
     }
 
     public Long getId() {
@@ -79,5 +90,23 @@ public class Post {
         Post otherPost = (Post)obj;
         return this.title.equals(otherPost.getTitle()) &&
                this.body.equals(otherPost.getBody());
+    }
+
+    public Author getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "title='" + title + '\'' +
+                ", body='" + body + '\'' +
+                ", date=" + date +
+                ", author=" + author +
+                '}';
     }
 }
